@@ -13,9 +13,9 @@ var StaticResources = function() {};
 StaticResources.prototype.setup = function(app, r) {
 
   console.log('setup the static assets file');
-  app.get(/assets/, function(req, resp) {
+  app.get(/app/, function(req, resp) {
     console.log('read asset file');
-    resp.sendfile(appDir + '/assets' + req.path);
+    resp.sendfile(appDir + req.path);
   });
 
   app.get(/index.html/, function(req, resp) {

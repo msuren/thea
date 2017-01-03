@@ -22,26 +22,13 @@ ProxyServer.prototype.setup = function(app, r) {
   app.all(/PrismGateway\/(.*)|api\/nutanix\/v(.*)\/(.*)/, function(req, resp) {
     var payload;
 
-    // Mock Data
-    //----------
-    // Check if serving mock data
-    if (env.mockServeData) {
-      mockController.serveMockData(req, resp);
-      return;
-    }
-
-
     // Real Data
     //----------
     try {
 
+      console.log(req.method);
       if (req.method === 'GET' || req.method === 'HEAD') {
-        r.get('https://' + proxyHost + ':' + proxyPort + req.url,
-          function(error, response, body) {
-            if (env.mockRecordData) {
-              mockController.writeFile(req.url, body);
-            }
-          })
+        r.get('https://' + proxyHost + ':' + proxyPort + req.url)
           .on('error', requestErrorHandler)
           .pipe(resp);
       } else if (req.method === 'POST') {
@@ -49,12 +36,6 @@ ProxyServer.prototype.setup = function(app, r) {
         r.post('https://' + proxyHost + ':' + proxyPort + req.url,
           {
             'body': payload
-          },
-          function(error, response, body) {
-            if (env.mockRecordData) {
-              var urlFile = mockController.formatPostUrl(req);
-              mockController.writeFile(urlFile, body);
-            }
           })
           .on('error', requestErrorHandler)
           .pipe(resp);

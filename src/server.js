@@ -20,13 +20,17 @@ var thea = {
   app: app
 };
 
+var base64UsernamePass =
+    new Buffer('admin:nutanix/4u').toString('base64');
+
 // Set up options for the request handler.
 var requestOptions = {
   'strictSSL': false,
   'headers': {
-    'Authorization': 'Basic '
+    'Authorization': 'Basic ' + base64UsernamePass
   }
 };
+
 
 var credentials = {
   key: fs.readFileSync('sslcert/server.key'),
