@@ -1,6 +1,8 @@
 module.exports = {
   thea : {
-    port : 4080
+    httpPort : 4080,
+    httpsPort : 4443,
+
   },
 
   logger: {
