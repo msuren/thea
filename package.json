@@ -18,6 +18,7 @@
     "deepobserve": "1.0.0",
     "ecstatic": "^0.8.0",
     "express": "4.12.3",
+    "express-ws": "^2.0.0",
     "flat": "1.5.1",
     "handlebars": "^3.0.3",
     "hbs": "^3.1.0",

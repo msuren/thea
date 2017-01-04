@@ -5,8 +5,6 @@ var config = require('config');
 var fs = require('fs');
 var path = require('path');
 var appDir = path.dirname(require.main.filename);
-var proxyHost = config.api.gatewayApiHost;
-var proxyPort = config.api.gatewayApiPort;
 var logger = require('logger');
 
 var StaticResources = function() {};
