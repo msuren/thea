@@ -44,8 +44,7 @@ ProxyServer.prototype.setup = function(app, r) {
           })
           .on('error', requestErrorHandler)
           .on('response', function(a,b) {
-            //console.log(a);
-            console.log(b);
+
           })
           .pipe(resp);
       } else if (req.method === 'PUT') {
