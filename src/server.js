@@ -1,4 +1,4 @@
-var config = require('./config/default.js');
+var config = require('config');
 
 var fs = require('fs');
 var http = require('http');
@@ -7,13 +7,12 @@ var request = require('request');
 var async = require('async');
 var express = require('express');
 var routes = require('./routes');
+var logger = require('logger');
 var _ = require('underscore');
 var loadMiddlewares = require('./load-middlewares');
 
-console.log(config);
-
-var httpPort = process.env.PORT || config.thea.httpPort,
-    httpsPort = process.env.HTTPS_PORT || config.thea.httpsPort,
+var httpPort = process.env.PORT || config.httpPort,
+    httpsPort = process.env.HTTPS_PORT || config.httpsPort,
     app = express();
 
 var thea = {
@@ -57,10 +56,10 @@ thea.start = function startServer(ready) {
 
   // Listen now.
   thea.httpServer.listen(httpPort,  function () {
-    console.log('Thea listening on http port ' + httpPort)
+    logger.info('Thea listening on http port ' + httpPort)
   });
   thea.httpsServer.listen(httpsPort,  function () {
-    console.log('Thea listening on https port ' + httpsPort)
+    logger.info('Thea listening on https port ' + httpsPort)
   });
 };
 
