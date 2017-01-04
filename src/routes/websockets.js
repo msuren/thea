@@ -2,19 +2,21 @@
 
 var config = require('config');
 var logger = require('logger');
+var url = require('url');
 
 var WebSockets = function() {};
 
-WebSockets.prototype.setup = function(app, r) {
+WebSockets.prototype.setup = function(app, r, wss) {
 
-  require('express-ws')(app);
-  logger.info('setup the web sockets');
+  wss.on('connection', function connection(ws) {
+    var location = url.parse(ws.upgradeReq.url, true);
+    console.log(location);
 
-  app.ws('/', function(ws, req) {
-    ws.on('message', function(msg) {
-      console.log(msg);
+    ws.on('message', function incoming(message) {
+      console.log('received: %s', message);
     });
-    console.log('socket', req.testing);
+
+    ws.send('something');
   });
 };
 

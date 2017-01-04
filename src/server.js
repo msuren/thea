@@ -7,6 +7,7 @@ var request = require('request');
 var async = require('async');
 var express = require('express');
 var routes = require('./routes');
+var WebSocketServer = require('ws').Server;
 var logger = require('logger');
 var _ = require('underscore');
 var loadMiddlewares = require('./load-middlewares');
@@ -46,13 +47,15 @@ thea.start = function startServer(ready) {
   // Load middlewares
   loadMiddlewares.load(app);
 
-  // Load routes
-  var r = request.defaults(requestOptions);
-  routes(app, r);
-
   // Create server
   thea.httpServer  = http.createServer(app);
   thea.httpsServer = https.createServer(credentials, app);
+
+  var wss = new WebSocketServer({ server: thea.httpServer });
+
+  // Load routes
+  var r = request.defaults(requestOptions);
+  routes(app, r, wss);
 
   // Listen now.
   thea.httpServer.listen(httpPort,  function () {

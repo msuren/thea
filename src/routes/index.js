@@ -6,8 +6,8 @@ require('fs').readdirSync(__dirname + '/').forEach(function(file) {
   }
 });
 
-module.exports = function(app, r) {
+module.exports = function(app, r, wss) {
   for(var key in exports) {
-    exports[key].setup(app, r);
+    exports[key].setup(app, r, wss);
   }
 };
