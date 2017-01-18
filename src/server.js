@@ -21,7 +21,7 @@ var thea = {
 };
 
 var base64UsernamePass =
-    new Buffer('admin:nutanix/4u').toString('base64');
+    new Buffer('admin:Nutanix.1').toString('base64');
 
 // Set up options for the request handler.
 var requestOptions = {

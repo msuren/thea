@@ -13,7 +13,6 @@ StaticResources.prototype.setup = function(app, r) {
 
   logger.info('setup the static assets file');
   app.get(/app/, function(req, resp) {
-    logger.info('read asset file');
     resp.sendfile(appDir + req.path);
   });
 
