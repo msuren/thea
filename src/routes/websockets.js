@@ -14,9 +14,8 @@ WebSockets.prototype.setup = function(app, r, wss) {
 
     ws.on('message', function incoming(message) {
       console.log('received: %s', message);
+      ws.send('hello');
     });
-
-    ws.send('something');
   });
 };
 

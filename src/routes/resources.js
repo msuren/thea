@@ -16,7 +16,7 @@ StaticResources.prototype.setup = function(app, r) {
     resp.sendfile(appDir + req.path);
   });
 
-  app.get(/index.html/, function(req, resp) {
+  app.get('/', function(req, resp) {
     logger.info('read index.html file ' + appDir +req.path);
     resp.sendfile(appDir + '/index.html');
   });
